@@ -41,6 +41,29 @@ class PostTest {
         assertTrue(Post.getAll().contains(post));
         assertTrue(Post.getAll().contains(otherPost));
     }
+    @Test
+    public void getPublished_isFalseAfterInstantiation_false() throws Exception{
+        Post myPost = new Post("Day 1:Intro");
+        assertEquals(false, myPost.getPublished());
+    }
+    @Test
+    public void getId_postsInstantiatewithAnID_1() throws Exception{
+        Post.clearAllPosts();
+        Post myPost = new Post("Day 1:Intro");
+        assertEquals(1,myPost.getId());
+    }
 
+    @Test
+    public void findReturnsCorrectPost() throws Exception {
+        Post post = setupNewPost();
+        assertEquals(1, Post.findById(post.getId()).getId());
+    }
+
+    @Test
+    public void findReturnsCorrectPostWhenMoreThanOnePostExists() throws Exception {
+        Post post = setupNewPost();
+        Post otherPost = new Post("How to pair successfully");
+        assertEquals(2, Post.findById(otherPost.getId()).getId());
+    }
 
 }
